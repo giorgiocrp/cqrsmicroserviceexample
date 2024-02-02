@@ -15,6 +15,7 @@ namespace ExampleUi.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

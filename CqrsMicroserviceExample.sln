@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationService", "Noti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedDomain", "SharedDomain\SharedDomain.csproj", "{8A63C23A-38BA-4E3B-B06E-D8CDA57F983E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService", "CatalogService\CatalogService.csproj", "{F124A65E-2C35-49A2-9635-10F457ADE68B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogService", "CatalogService\CatalogService.csproj", "{F124A65E-2C35-49A2-9635-10F457ADE68B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleUi", "ExampleUi\ExampleUi.csproj", "{7BD09414-2A77-4538-91FE-AAAB81675E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleUi", "ExampleUi\ExampleUi.csproj", "{7BD09414-2A77-4538-91FE-AAAB81675E9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{18BDAEB2-A070-46A2-9C02-454696841B2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{7BD09414-2A77-4538-91FE-AAAB81675E9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BD09414-2A77-4538-91FE-AAAB81675E9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BD09414-2A77-4538-91FE-AAAB81675E9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
