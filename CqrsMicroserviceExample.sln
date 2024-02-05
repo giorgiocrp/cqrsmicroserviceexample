@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleUi", "ExampleUi\Exam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{18BDAEB2-A070-46A2-9C02-454696841B2F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{A6AEE647-C634-4FD9-8CBC-34968EE12715}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18BDAEB2-A070-46A2-9C02-454696841B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6AEE647-C634-4FD9-8CBC-34968EE12715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6AEE647-C634-4FD9-8CBC-34968EE12715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6AEE647-C634-4FD9-8CBC-34968EE12715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6AEE647-C634-4FD9-8CBC-34968EE12715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

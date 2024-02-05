@@ -1,0 +1,37 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7254"
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/product/getproducts",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/catalog/getproducts",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7066
+        }
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 10
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/product/getproduct/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/catalog/getproduct/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7066
+        }
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 10
+      }
+    }
+  ]
+}

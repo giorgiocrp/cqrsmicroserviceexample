@@ -1,28 +1,34 @@
 using ExampleUi.Models;
+using ExampleUi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Cryptography.Xml;
 
 namespace ExampleUi.Controllers
 {
     public class CatalogController : Controller
     {
-        private readonly ILogger<CatalogController> _logger;
+        private readonly ILogger<CatalogController> _logger; 
+        private readonly ICatalogService _catalogService;     
 
-        public CatalogController(ILogger<CatalogController> logger)
+        public CatalogController(ILogger<CatalogController> logger, ICatalogService catalogService)
         {
             _logger = logger;
+            _catalogService = catalogService;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("GetProductById/{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            //var product=
-            return View();
+            Product product = await _catalogService.GetProductById(id);
+            return View(product);
         }
 
-        public IActionResult GetAll()
+        [HttpGet("GetProducts")]
+        public async Task<IActionResult> GetAll()
         {
-            return View();
+            var products = await _catalogService.GetProducts();
+            return View(products);
         }       
     }
 }

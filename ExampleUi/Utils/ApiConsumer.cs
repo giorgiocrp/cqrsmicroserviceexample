@@ -35,7 +35,7 @@ namespace ExampleUi.Utils
             }
         }
 
-        public async Task<IEnumerable<T>> GetAsync(string url, HttpClientHandler httpClientHandler)
+        public async Task<T> GetAsync(string url, HttpClientHandler httpClientHandler)
         {
             try
             {
@@ -43,18 +43,26 @@ namespace ExampleUi.Utils
                 {
                     client.BaseAddress = new Uri(BaseUrl);
                     client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));                  
 
                     var response = await client.GetAsync(url);
 
+                    if (String.Equals(url, "endpoint", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        var testContent= await response.Content.ReadAsStringAsync();
+
+                        testContent=testContent.Replace(@"""", @"");
+                        return (T)(Object)testContent;
+                    }
+
                     if (response.IsSuccessStatusCode)
                     {
-                        var content = await response.Content.ReadAsStringAsync();
                         var options = new JsonSerializerOptions
                         {
                             PropertyNameCaseInsensitive = true
                         };
-                        return JsonSerializer.Deserialize<IEnumerable<T>>(content, options);
+
+                        return await response.Content.ReadFromJsonAsync<T>();                               
                     }
                     else
                     {
@@ -66,7 +74,40 @@ namespace ExampleUi.Utils
             {
                 throw;
             }
-        }      
+        }
+
+        public async Task<IEnumerable<T>> GetCollectionAsync(string url, HttpClientHandler httpClientHandler)
+        {
+            try
+            {
+                using (var client = new HttpClient(httpClientHandler))
+                {
+                    client.BaseAddress = new Uri(BaseUrl);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));                  
+
+                    var response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var options = new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        };
+
+                        return await response.Content.ReadFromJsonAsync<IEnumerable<T>>();                               
+                    }
+                    else
+                    {
+                        throw new Exception(response.StatusCode.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         public async Task PostAsync(string url, T entity, HttpClientHandler httpClientHandler)
         {

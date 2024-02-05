@@ -18,7 +18,7 @@ namespace test.ExampleUITest
         {
             // Arrange
             var expectedData = new List<string> { "data1", "data2", "data3" };
-            var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.OK, expectedData);
+            var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.OK, expectedData.First());
             var apiConsumer = new ApiConsumer<string>() { BaseUrl = BaseUrl };
             var url = "endpoint";
 
@@ -26,11 +26,11 @@ namespace test.ExampleUITest
             var result = await apiConsumer.GetAsync(url, httpClientHandler);
 
             // Assert
-            Assert.Equal(expectedData, result);
+            Assert.Equal(expectedData.First(), result);
         }
 
         [Fact]
-        public void GetAsync_InvalidUrl_ThrowsException()
+        public async Task GetAsync_InvalidUrl_ThrowsException()
         {
             // Arrange
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.NotFound);
@@ -38,7 +38,7 @@ namespace test.ExampleUITest
             var url = "invalidendpoint";
 
             // Act & Assert
-            Assert.ThrowsAsync<Exception>(async () => await apiConsumer.GetAsync(url, httpClientHandler));
+            await Assert.ThrowsAsync<Exception>(async () => await apiConsumer.GetAsync(url, httpClientHandler));
         }
 
 
@@ -49,7 +49,7 @@ namespace test.ExampleUITest
             var entity = new List<string> { "data1", "data2", "data3" };
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.OK);
             var apiConsumer = new ApiConsumer<string>() { BaseUrl = BaseUrl };
-            var url = "endpoint";
+            var url = "TEST";
 
             // Act            
             var exception = await Record.ExceptionAsync(() => apiConsumer.DeleteAsync(url, entity[0], httpClientHandler));
@@ -59,7 +59,7 @@ namespace test.ExampleUITest
         }
 
         [Fact]
-        public void DeleteAsync_InvalidUrl_ThrowsException()
+        public async Task DeleteAsync_InvalidUrl_ThrowsException()
         {
             // Arrange
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.NotFound);
@@ -67,7 +67,7 @@ namespace test.ExampleUITest
             var url = "invalidendpoint";
 
             // Act & Assert
-            Assert.ThrowsAsync<Exception>(async () => await apiConsumer.DeleteAsync(url, string.Empty, httpClientHandler));
+            await Assert.ThrowsAsync<Exception>(async () => await apiConsumer.DeleteAsync(url, string.Empty, httpClientHandler));
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace test.ExampleUITest
             var entity = new List<string> { "data1", "data2", "data3" };
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.OK);
             var apiConsumer = new ApiConsumer<string>() { BaseUrl = BaseUrl };
-            var url = "endpoint";
+            var url = "TEST";
 
             // Act            
             var exception = await Record.ExceptionAsync(() => apiConsumer.PostAsync(url, entity[0], httpClientHandler));
@@ -87,7 +87,7 @@ namespace test.ExampleUITest
         }
 
         [Fact]
-        public void PostAsync_InvalidUrl_ThrowsException()
+        public async Task PostAsync_InvalidUrl_ThrowsException()
         {
             // Arrange
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.NotFound);
@@ -95,7 +95,7 @@ namespace test.ExampleUITest
             var url = "invalidendpoint";
 
             // Act & Assert
-            Assert.ThrowsAsync<Exception>(async () => await apiConsumer.PostAsync(url, string.Empty, httpClientHandler));
+           await Assert.ThrowsAsync<Exception>(async () => await apiConsumer.PostAsync(url, string.Empty, httpClientHandler));
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace test.ExampleUITest
             var entity = new List<string> { "data1", "data2", "data3" };
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.OK);
             var apiConsumer = new ApiConsumer<string>() { BaseUrl = BaseUrl };
-            var url = "endpoint";
+            var url = "TEST";
 
             // Act            
             var exception = await Record.ExceptionAsync(() => apiConsumer.PutAsync(url, entity[0], httpClientHandler));
@@ -115,7 +115,7 @@ namespace test.ExampleUITest
         }
 
         [Fact]
-        public void PutAsync_InvalidUrl_ThrowsException()
+        public async Task PutAsync_InvalidUrl_ThrowsException()
         {
             // Arrange
             var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.NotFound);
@@ -123,7 +123,35 @@ namespace test.ExampleUITest
             var url = "invalidendpoint";
 
             // Act & Assert
-            Assert.ThrowsAsync<Exception>(async () => await apiConsumer.PutAsync(url, string.Empty, httpClientHandler));
+            await Assert.ThrowsAsync<Exception>(async () => await apiConsumer.PutAsync(url, string.Empty, httpClientHandler));
+        }
+
+        [Fact]
+        public async Task GetCollectionAsync_ValidUrl_ReturnsData()
+        {
+            // Arrange
+            var expectedData = new List<string> { "data1", "data2", "data3" };
+            var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.OK, expectedData);
+            var apiConsumer = new ApiConsumer<string>() { BaseUrl = BaseUrl };
+            var url = "TEST";
+
+            // Act
+            var result = await apiConsumer.GetCollectionAsync(url, httpClientHandler);
+
+            // Assert
+            Assert.Equal(expectedData, result);
+        }
+
+        [Fact]
+        public async Task GetCollectionAsync_InvalidUrl_ThrowsException()
+        {
+            // Arrange
+            var httpClientHandler = new StubHttpClientHandler(HttpStatusCode.NotFound);
+            var apiConsumer = new ApiConsumer<string>() { BaseUrl = BaseUrl };
+            var url = "invalidendpoint";
+
+            // Act & Assert
+            await Assert.ThrowsAsync<Exception>(async () => await apiConsumer.GetCollectionAsync(url, httpClientHandler));
         }
     }
 
