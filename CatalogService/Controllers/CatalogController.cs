@@ -1,3 +1,4 @@
+using CatalogService.Commands;
 using CatalogService.Model;
 using CatalogService.Queries;
 using MediatR;
@@ -20,11 +21,11 @@ namespace CatalogService.Controllers
             _mediator=mediator;
         }
 
-        [HttpGet("GetProduct/{id}")]
+        [HttpGet("GetProductById/{id}")]
         [ProducesResponseType(typeof(Product), 200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetProduct(int id)
+        public async Task<IActionResult> GetProductById(int id)
         {
             // var product = new Product() { ProductId=id, Name="Prodotto Test", Category=new Category() { CategoryId=1, Name="Categoria Test" } };
             // return Ok(await Task.Run(()=>product));            
@@ -44,6 +45,17 @@ namespace CatalogService.Controllers
 
             var product=await _mediator.Send(new GetProductsQuery());
             return Ok(product);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(Product), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult> AddProduct([FromBody] Product product)
+        {
+            var productToReturn = await _mediator.Send(new AddProductCommand(product));
+
+            return Ok(productToReturn);
         }
     }
 }
