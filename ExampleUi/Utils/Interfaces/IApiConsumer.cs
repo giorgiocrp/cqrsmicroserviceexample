@@ -4,7 +4,7 @@ namespace ExampleUi.Utils.Interfaces {
         Task<T> GetAsync(string url, HttpClientHandler httpClientHandler);
         Task<IEnumerable<T>> GetCollectionAsync(string url, HttpClientHandler httpClientHandler);
         Task DeleteAsync(string url,T entity, HttpClientHandler httpClientHandler);
-        Task PutAsync(string url,T entity, HttpClientHandler httpClientHandler);
-        Task PostAsync(string url,T entity, HttpClientHandler httpClientHandler);
+        Task<T> PutAsync(string url,T entity, HttpClientHandler httpClientHandler);
+        Task<T> PostAsync(string url,T entity, HttpClientHandler httpClientHandler);
     }
 }

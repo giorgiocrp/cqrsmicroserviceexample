@@ -11,6 +11,15 @@ namespace ExampleUi.Services.Implementations
             _configuration = configuration;
         }
 
+        public async Task<Product> AddProduct(Product entity)
+        {
+            var client = new CatalogApiConsumer();
+            var handler = new HttpClientHandler();
+            client.BaseUrl = _configuration["ServiceEndPoint:ApiClient:CatalogServiceEndPoint"].ToString();
+            var result = await client.PostAsync($"/gateway/catalog/product/addproduct",entity, handler);
+            return result;
+        }
+
         public async Task<Product> GetProductById(int id)
         {
             var client = new CatalogApiConsumer();

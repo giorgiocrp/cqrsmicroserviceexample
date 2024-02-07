@@ -2,7 +2,7 @@ using CatalogService.Interfaces;
 
 namespace CatalogService.Model
 {
-    public class Product:IBase
+    public class Product:Entity,IBase
     {
          public int Id => ProductId;
          public int ProductId { get; set; }

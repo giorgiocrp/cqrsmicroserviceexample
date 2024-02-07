@@ -32,6 +32,18 @@
       "FileCacheOptions": {
         "TtlSeconds": 10
       }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/product/addproduct",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/catalog/addproduct",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7066
+        }
+      ]
     }
   ]
 }

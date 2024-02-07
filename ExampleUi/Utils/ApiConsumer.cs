@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ExampleUi.Models;
 using ExampleUi.Utils.Interfaces;
 
 namespace ExampleUi.Utils
@@ -109,7 +110,7 @@ namespace ExampleUi.Utils
             }
         }
 
-        public async Task PostAsync(string url, T entity, HttpClientHandler httpClientHandler)
+        public async Task<T> PostAsync(string url, T entity, HttpClientHandler httpClientHandler)
         {
             try
             {
@@ -125,6 +126,8 @@ namespace ExampleUi.Utils
                     {
                         throw new Exception(res.StatusCode.ToString());
                     }
+
+                    return entity;
                 }
             }
             catch (System.Exception ex)
@@ -133,7 +136,7 @@ namespace ExampleUi.Utils
             }
         }     
 
-        public async Task PutAsync(string url, T entity, HttpClientHandler httpClientHandler)
+        public async Task<T> PutAsync(string url, T entity, HttpClientHandler httpClientHandler)
         {
             try
             {
@@ -149,6 +152,8 @@ namespace ExampleUi.Utils
                     {
                         throw new Exception(res.StatusCode.ToString());
                     }
+
+                    return entity;
                 }
             }
             catch (System.Exception ex)

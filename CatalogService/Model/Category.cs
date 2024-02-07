@@ -2,7 +2,7 @@ using CatalogService.Interfaces;
 
 namespace CatalogService.Model
 {
-    public class Category:IBase
+    public class Category:Entity,IBase
     {
          public int Id => CategoryId;
          public int CategoryId { get; set; }

@@ -6,5 +6,6 @@ namespace ExampleUi.Services.Interfaces
     {
         Task<Product> GetProductById(int id);
         Task<IEnumerable<Product>> GetProducts();
+        Task<Product> AddProduct(Product entity);
     }
 }

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using CatalogService.Commands;
 using CatalogService.Model;
 using CatalogService.Queries;
@@ -29,7 +30,7 @@ namespace CatalogService.Controllers
         {
             // var product = new Product() { ProductId=id, Name="Prodotto Test", Category=new Category() { CategoryId=1, Name="Categoria Test" } };
             // return Ok(await Task.Run(()=>product));            
-
+           
             var product=await _mediator.Send(new GetProductByIdQuery(id));
             return Ok(product);
         }
@@ -54,7 +55,8 @@ namespace CatalogService.Controllers
         public async Task<ActionResult> AddProduct([FromBody] Product product)
         {
             var productToReturn = await _mediator.Send(new AddProductCommand(product));
-
+             _logger.LogInformation("AddProductCommand: "+JsonSerializer.Serialize<Product>(productToReturn));
+            // await _mediator.Publish();
             return Ok(productToReturn);
         }
     }
